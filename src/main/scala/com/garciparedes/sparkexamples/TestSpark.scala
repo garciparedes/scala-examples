@@ -1,4 +1,4 @@
-package sparkexamples
+package com.garciparedes.sparkexamples
 
 import org.apache.spark.{SparkConf, SparkContext}
 

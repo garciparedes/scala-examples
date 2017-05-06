@@ -1,5 +1,5 @@
 
-package sparkexamples
+package com.garciparedes.sparkexamples
 
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming._

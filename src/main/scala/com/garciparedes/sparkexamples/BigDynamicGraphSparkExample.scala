@@ -1,5 +1,5 @@
 
-package sparkexamples
+package com.garciparedes.sparkexamples
 
 import java.util.Calendar
 

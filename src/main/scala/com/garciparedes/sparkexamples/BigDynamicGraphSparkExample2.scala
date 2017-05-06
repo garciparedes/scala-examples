@@ -1,10 +1,10 @@
 
-package sparkexamples
+package com.garciparedes.sparkexamples
 
 import java.util.Calendar
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.graphx._
+import org.apache.spark.{SparkConf, SparkContext}
 
 
 object BigDynamicGraphSparkExample2 {
@@ -39,7 +39,7 @@ object BigDynamicGraphSparkExample2 {
 
 
     println(Calendar.getInstance().getTime + "\tDone Update!")
-    
+
     sc.stop()
     println(Calendar.getInstance().getTime + "\tFinish!")
 

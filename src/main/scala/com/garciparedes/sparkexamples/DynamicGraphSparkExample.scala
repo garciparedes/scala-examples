@@ -1,5 +1,5 @@
 
-package sparkexamples
+package com.garciparedes.sparkexamples
 
 import org.apache.spark.graphx._
 import org.apache.spark.graphx.lib.PageRank
