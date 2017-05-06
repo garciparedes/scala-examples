@@ -26,6 +26,8 @@ object BigDynamicGraphSparkExample2 {
     val graph: Graph[Int, Int] = GraphLoader.edgeListFile(sc, graphFile)
     println(Calendar.getInstance().getTime + "\tDone Load!")
 
+    //TODO implements incremental graph
+    /*
     var graph_incremental: Graph[Int, Int] = Graph(graph.vertices, sc.parallelize(Array(Edge(1L, 3L, 1))))
 
     graph.edges.map((e) => {
@@ -33,13 +35,11 @@ object BigDynamicGraphSparkExample2 {
         sc.parallelize(Array(e))
       ))
     })
+    */
 
 
     println(Calendar.getInstance().getTime + "\tDone Update!")
-
-
-    println(Calendar.getInstance().getTime + "\tDone Second PageRank!")
-
+    
     sc.stop()
     println(Calendar.getInstance().getTime + "\tFinish!")
 
