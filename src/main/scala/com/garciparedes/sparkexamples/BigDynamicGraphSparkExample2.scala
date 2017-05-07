@@ -6,37 +6,28 @@ import java.util.Calendar
 import org.apache.spark.graphx._
 import org.apache.spark.{SparkConf, SparkContext}
 
-
 object BigDynamicGraphSparkExample2 {
   def main(args: Array[String]): Unit = {
-
+    val topKResults = 100
 
     val conf = new SparkConf()
+
     conf.setAppName("Dynamic Graph Spark Example")
     conf.setMaster("local[*]")
 
     val sc = new SparkContext(conf)
-
-    val pagerankItRers = 2
-    val topKResults = 100
     val graphFile = "./datasets/wiki-Vote.txt"
 
     println(Calendar.getInstance().getTime + "\tStart!")
 
-    val graph: Graph[Int, Int] = GraphLoader.edgeListFile(sc, graphFile)
+    var graph: Graph[Int, Int] = GraphLoader.edgeListFile(sc, graphFile)
     println(Calendar.getInstance().getTime + "\tDone Load!")
 
-    //TODO implements incremental graph
-    /*
-    var graph_incremental: Graph[Int, Int] = Graph(graph.vertices, sc.parallelize(Array(Edge(1L, 3L, 1))))
-
-    graph.edges.map((e) => {
-      graph_incremental = Graph(graph_incremental.vertices, graph_incremental.edges.union(
-        sc.parallelize(Array(e))
+    graph = Graph(graph.vertices, graph.edges.union(
+      sc.parallelize(Array(
+        Edge(1L, 3L, 1)
       ))
-    })
-    */
-
+    )).groupEdges((a, b) => a + b)
 
     println(Calendar.getInstance().getTime + "\tDone Update!")
 
