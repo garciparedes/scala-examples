@@ -1,6 +1,7 @@
 
-package com.garciparedes.sparkexamples
+package com.garciparedes.sparkexamples.main
 
+import com.garciparedes.sparkexamples.GraphUpgradeable
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.streaming._
 import org.apache.spark.{SparkConf, SparkContext}
