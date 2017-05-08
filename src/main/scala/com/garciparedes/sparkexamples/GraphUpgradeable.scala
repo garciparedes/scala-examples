@@ -7,7 +7,7 @@ import org.apache.spark.graphx._
 /**
   * Created by garciparedes on 07/05/2017.
   */
-class GraphUpgradeable(var sc: SparkContext, var graph: Graph[Int, Double]) extends Serializable {
+class GraphUpgradeable(var sc: SparkContext, var graph: Graph[Int, Int]) extends Serializable {
 
   def this(sc: SparkContext) {
     this(sc, null)
@@ -21,11 +21,11 @@ class GraphUpgradeable(var sc: SparkContext, var graph: Graph[Int, Double]) exte
     edgeList.foreach(println)
     if (graph != null) {
       graph = Graph.fromEdges(
-        graph.edges.union(sc.parallelize(edgeList).map((e) => Edge(e._1, e._2, 1.0))), 1)
-        .partitionBy(RandomVertexCut).
-        groupEdges((attr1, attr2) => attr1 + attr2)
+        graph.edges.union(sc.parallelize(edgeList).map((e) => Edge(e._1, e._2, 1))), 1)
+        .partitionBy(RandomVertexCut)
+        .groupEdges((attr1, attr2) => attr1 + attr2)
     } else {
-      graph = Graph.fromEdges(sc.parallelize(edgeList).map((e) => Edge(e._1, e._2, 1.0)), 1)
+      graph = Graph.fromEdges(sc.parallelize(edgeList).map((e) => Edge(e._1, e._2, 1)), 1)
     }
   }
 
