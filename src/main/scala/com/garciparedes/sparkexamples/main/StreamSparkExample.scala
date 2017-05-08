@@ -18,7 +18,7 @@ object StreamSparkExample {
     conf.setMaster("local[*]")
 
     val sc = new SparkContext(conf)
-    val ssc = new StreamingContext(sc, Milliseconds(50))
+    val ssc = new StreamingContext(sc, Milliseconds(100))
 
     val lines = ssc.socketTextStream("localhost", 9999)
 
@@ -38,11 +38,10 @@ object StreamSparkExample {
 
 
     lines.foreachRDD { rdd =>
-      g.addToGraph(
-        rdd.map(lineString2TupleLong)
+      val l = rdd.map(lineString2TupleLong)
           .collect { case x: (Long, Long)@unchecked => x }
           .collect()
-      )
+      l match {case x: Array[(Long, Long)] => if (x.nonEmpty) g.addToGraph(l)}
       //g.print()
     }
 
