@@ -3,12 +3,13 @@ package com.garciparedes.sparkexamples
 import org.apache.spark.SparkContext
 import org.apache.spark.graphx.PartitionStrategy.RandomVertexCut
 import org.apache.spark.graphx._
+import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
 
 /**
   * Created by garciparedes on 07/05/2017.
   */
-class GraphUpgradeable(var sc: SparkContext, var graph: Graph[Int, Int]) extends Serializable {
+class GraphUpgradeable(var sc: SparkContext, var graph: Graph[Int, Int]) {
 
   def this(sc: SparkContext) {
     this(sc, null)
@@ -19,24 +20,23 @@ class GraphUpgradeable(var sc: SparkContext, var graph: Graph[Int, Int]) extends
   }
 
   def addToGraph(edgeList: Array[(Long, Long)]): Any = {
-    edgeList.foreach(println)
+    addToGraph(sc.parallelize(edgeList).map((e) => Edge(e._1, e._2, 1)))
+  }
+
+
+  def addToGraph(edgeList: RDD[Edge[Int]]): Any = {
+    var e = edgeList
+
     if (graph != null) {
-      graph = Graph.fromEdges(
-        graph.edges.union(
-          sc.parallelize(edgeList).map((e) => Edge(e._1, e._2))),
-        1,
-        StorageLevel.MEMORY_AND_DISK,
-        StorageLevel.MEMORY_AND_DISK
-      ).partitionBy(RandomVertexCut)
-        .groupEdges((a, b) => a + b)
-    } else {
-      graph = Graph.fromEdges(
-        sc.parallelize(edgeList).map((e) => Edge(e._1, e._2)),
-        1,
-        StorageLevel.MEMORY_AND_DISK,
-        StorageLevel.MEMORY_AND_DISK
-      )
+      e = graph.edges.union(e)
     }
+
+    graph = Graph.fromEdges[Int, Int](
+      e, 1,
+      StorageLevel.MEMORY_AND_DISK,
+      StorageLevel.MEMORY_AND_DISK
+    ).partitionBy(RandomVertexCut)
+      .groupEdges((a, b) => 1)
   }
 
   def print(edges: Int = 100): Unit = {
