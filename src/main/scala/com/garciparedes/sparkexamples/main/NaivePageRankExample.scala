@@ -21,32 +21,53 @@ object NaivePageRankExample {
       round(a * pow(10, decimals)) / pow(10, decimals)
     }
 
+    val adjacencyToTransition: (Matrix, Int, Double) => Matrix = (aM, n, beta) => {
+      Matrices.dense(n, n, aM.rowIter.map(
+        r => r.toArray.map(c => c / r.toArray.sum)
+      ).reduce((a, b) => a ++ b))
+    }
 
-    val aM: Matrix = Matrices.dense(4, 4, Array(
+    val n: Int = 4
+    val beta: Double = 0.85
+
+    var aM: Matrix = Matrices.dense(n, n, Array(
       0, 0, 1, 1,
       1, 0, 0, 0,
       1, 1, 0, 1,
       1, 1, 0, 0
     ))
+    //aM.rowIter.foreach(println)
 
-    aM.rowIter.foreach(println)
-
-
-    val tM = Matrices.dense(4, 4,
-      aM.rowIter.map(r => r.toArray.map(c => c / r.toArray.sum)).reduce((a, b) => a ++ b))
+    var tM = adjacencyToTransition(aM, n, beta)
     tM.rowIter.foreach(println)
-
 
     var v: Vector = Vectors.dense(0.25, 0.25, 0.25, 0.25)
 
-    val n: Int = v.size
-    val beta: Double = 0.85
-
     println(s"[${v.toArray.mkString("\t")}]")
+
 
     for (i <- 1 to 10) {
       v = tM.multiply(v)
       println(s"[${v.toArray.map(truncate(_, 4)).mkString("\t")}]")
     }
+
+
+    aM = Matrices.dense(n, n, Array(
+      0, 0, 1, 1,
+      1, 0, 0, 1,
+      1, 1, 0, 0,
+      0, 1, 1, 0
+    ))
+
+    //aM.rowIter.foreach(println)
+
+    tM = adjacencyToTransition(aM, n, beta)
+    tM.rowIter.foreach(println)
+
+    for (i <- 1 to 10) {
+      v = tM.multiply(v)
+      println(s"[${v.toArray.map(truncate(_, 4)).mkString("\t")}]")
+    }
+
   }
 }
