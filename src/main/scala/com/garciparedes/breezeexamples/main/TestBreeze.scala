@@ -1,6 +1,6 @@
 package com.garciparedes.breezeexamples.main
 
-import breeze.linalg.DenseVector
+import breeze.linalg.{DenseMatrix, DenseVector}
 
 
 /**
@@ -9,9 +9,12 @@ import breeze.linalg.DenseVector
 object TestBreeze {
   def main(args: Array[String]): Unit = {
 
-    val x = DenseVector.zeros[Double](5)
-
+    var x = DenseVector.zeros[Double](5)
+    var a = DenseMatrix.ones[Double](5,5)
+    x(3 to 4) := .5
     x(1) = 1
+
+    a =  x * a
 
     x.foreach(println)
   }

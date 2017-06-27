@@ -14,15 +14,14 @@ object GraphSparkExample {
     conf.setMaster("local[*]")
 
     val sc = new SparkContext(conf)
+    sc.setLogLevel("WARN")
 
     val graph = GraphLoader.edgeListFile(sc, graphFile).persist()
-    val ranks = PageRank.run(graph, 5).vertices.persist()
+    val ranks = PageRank.runUntilConvergence(graph, 0.01).vertices.persist()
 
-    ranks.join(graph.inDegrees)
-      .takeOrdered(100)(Ordering[Double].reverse.on(_._2._1))
+    ranks
+      .collect.sortBy(_._2).reverse
       .foreach(println)
-
-    graph.edges.take(100).foreach(println)
     sc.stop()
   }
 }

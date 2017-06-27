@@ -43,7 +43,7 @@ object PageRankExample {
     // Load the edges as a graph
     val graph = GraphLoader.edgeListFile(sc, "./datasets/followers.txt")
     // Run PageRank
-    val ranks = graph.pageRank(0.0001).vertices
+    val ranks = graph.pageRank(0.01).vertices
     // Join the ranks with the usernames
     val users = sc.textFile("./datasets/users.txt").map { line =>
       val fields = line.split(",")
@@ -53,7 +53,7 @@ object PageRankExample {
       case (id, (username, rank)) => (username, rank)
     }
     // Print the result
-    println(ranksByUsername.collect().mkString("\n"))
+    println(ranks.collect().mkString("\n"))
     // $example off$
     sc.stop()
   }
