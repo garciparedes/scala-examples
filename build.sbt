@@ -1,19 +1,31 @@
 name := "scala-examples"
 
-version := "1.0"
+version := "0.1"
 
-val sparkVersion = "2.1.1"
-val breezeVersion = "0.12"
+scalaVersion := "2.11.11"
 
-scalaVersion := "2.11.8"
+lazy val sparkVersion = "2.3.0"
+lazy val spark = "org.apache.spark"
 
-libraryDependencies += "org.apache.spark" %% "spark-core"       % sparkVersion
-libraryDependencies += "org.apache.spark" %% "spark-graphx"     % sparkVersion
-libraryDependencies += "org.apache.spark" %% "spark-streaming"  % sparkVersion
-libraryDependencies += "org.apache.spark" %% "spark-mllib"      % sparkVersion
-libraryDependencies += "org.scalanlp"     %% "breeze"           % breezeVersion
-libraryDependencies += "org.scalanlp"     %% "breeze-natives"   % breezeVersion
-libraryDependencies += "org.scalanlp"     %% "breeze-viz"       % breezeVersion
+lazy val breezeVersion = "0.13.2"
+lazy val scalaNlp = "org.scalanlp"
 
-resolvers += "Sonatype Snapshots" at  "https://oss.sonatype.org/content/repositories/snapshots/"
-resolvers += "Sonatype Releases"  at  "https://oss.sonatype.org/content/repositories/releases/"
+
+libraryDependencies  ++= Seq(
+
+  // Scala Dependencies
+  scalaNlp %% "breeze" % breezeVersion,
+  scalaNlp %% "breeze-natives" % breezeVersion,
+  scalaNlp %% "breeze-viz" % breezeVersion,
+
+  // Spark Dependencies
+  spark %% "spark-core" % sparkVersion,
+  spark %% "spark-sql" % sparkVersion,
+  spark %% "spark-streaming" % sparkVersion,
+  spark %% "spark-graphx" % sparkVersion,
+  spark %% "spark-mllib" % sparkVersion
+
+)
+
+
+resolvers += "Sonatype Releases" at "https://oss.sonatype.org/content/repositories/releases/"

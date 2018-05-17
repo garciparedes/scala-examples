@@ -1,13 +1,17 @@
-# scala-examples
+# Scala Examples
 
 ## Description
-TODO: Write description
+
+Set of awesome Scala Examples.
+
+## Contents
+
+  * TODO: Write description
 
 ## Authors
-  - García Prado, Sergio: [@garciparedes](http://garciparedes.me)
+  
+  * Sergio García Prado - [garciparedes.me](http://garciparedes.me)
 
 ## License
-[Mozilla Public License Version 2.0](LICENSE)
-
-## Like it? Awesome!
-If you find this useful, consider supporting or [buying me a beer!](https://www.paypal.me/garciparedes/2) 🙂
+    
+   [Mozilla Public License Version 2.0](LICENSE)
