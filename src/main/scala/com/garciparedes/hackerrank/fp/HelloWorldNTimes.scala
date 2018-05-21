@@ -1,12 +1,12 @@
 package com.garciparedes.hackerrank.fp
 
-import scala.io.Source.stdin
+import scala.io
 
 object HelloWorldNTimes extends App {
 
   def f(n: Int) = (1 to n).foreach( _ => println("Hello World"))
 
-  var n = scala.io.StdIn.readInt
+  var n = io.StdIn.readInt
   
   f(n)
 }
