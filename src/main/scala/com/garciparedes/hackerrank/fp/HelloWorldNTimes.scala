@@ -4,18 +4,9 @@ import scala.io.Source.stdin
 
 object HelloWorldNTimes extends App {
 
-
-  def f(n: Int): Unit = {
-    n match {
-      case x if x > 0 =>
-        println("Hello World")
-        f(x - 1)
-      case _ =>
-    }
-  }
-
-
+  def f(n: Int) = (1 to n).foreach( _ => println("Hello World"))
 
   var n = scala.io.StdIn.readInt
+  
   f(n)
 }
