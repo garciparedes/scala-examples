@@ -4,9 +4,8 @@ import scala.io
 
 object ListReplication extends App{
 
-  def f(num:Int, arr: List[Int]): List[Int] = {
-    arr.flatMap((i: Int) => List.fill(num)(i))
-  }
+  def f(num:Int, arr: List[Int]): List[Int] = arr
+      .flatMap((i: Int) => List.fill(num)(i))
 
   val num: Int = io.StdIn.readInt
 
