@@ -1,11 +1,8 @@
 package com.garciparedes.hackerrank.fp
 
-object HelloWorld {
+object HelloWorld extends App {
 
-  def main(args: Array[String]): Unit = {
+  def f(): Unit = println("Hello World")
 
-    def f() = println("Hello World")
-
-    f()
-  }
+  f()
 }

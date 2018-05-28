@@ -1,18 +1,15 @@
 package com.garciparedes.hackerrank.fp
 
 
-import scala.annotation.tailrec
 import scala.io
 
 object FilterPositionsInAList extends App {
 
-  def f(arr: List[Int]):List[Int] = {
-    @tailrec
-    def fRec(arr1: List[Int], arr2:List[Int] = List()): List[Int] = {
-      if (arr1.length < 2) arr2
-      else fRec(arr1.drop(2), arr2 :+ arr1(1))
+  def f(arr: List[Int], arr2: List[Int] = List()): List[Int] = {
+    arr.length match {
+      case x == 1 => arr2
+      case _ => f(arr.drop(2), arr2 :+ arr(1))
     }
-    fRec(arr)
   }
 
   val list: List[Int] = Iterator.continually(io.StdIn.readLine)

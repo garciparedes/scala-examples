@@ -2,16 +2,19 @@ package com.garciparedes.hackerrank.fp
 
 import scala.io
 
-object FilterArray extends App{
+object FilterArray extends App {
 
-    def f(delim: Int, arr: List[Int]): List[Int] = arr.filter(_ < delim)
+  def f(delim: Int, arr: List[Int]): List[Int] = arr
+    .filter(_ < delim)
 
-    val delim: Int = io.StdIn.readInt
+  val delim: Int = io.StdIn.readInt
 
-    val list: List[Int] = Iterator.continually(io.StdIn.readLine)
-      .takeWhile(_.nonEmpty)
-      .map(_.toInt)
-      .toList
+  val list: List[Int] = Iterator
+    .continually(io.StdIn.readLine)
+    .takeWhile(_.nonEmpty)
+    .map(_.toInt)
+    .toList
 
-    f(delim, list).foreach(println)
+  f(delim, list)
+    .foreach(println)
 }

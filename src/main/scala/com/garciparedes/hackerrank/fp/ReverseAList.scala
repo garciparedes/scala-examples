@@ -6,7 +6,7 @@ import scala.io
 object ReverseAList extends App {
 
   @tailrec
-  def f(arr: List[Int], arr2:List[Int] = List()): List[Int] = {
+  def f(arr: List[Int], arr2: List[Int] = List()): List[Int] = {
     arr.length match {
       case 0 => arr2
       case _ => f(arr.drop(1), arr.head +: arr2)
