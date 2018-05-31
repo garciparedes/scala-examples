@@ -13,7 +13,8 @@ object ReverseAList extends App {
     }
   }
 
-  val list: List[Int] = Iterator.continually(io.StdIn.readLine)
+  val list: List[Int] = Iterator
+    .continually(io.StdIn.readLine)
     .takeWhile(_.nonEmpty)
     .map(_.toInt)
     .toList
