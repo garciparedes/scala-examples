@@ -1,4 +1,4 @@
-package com.garciparedes.hackerrank.fp
+package com.garciparedes.hackerrank.fp.introduction
 
 import scala.annotation.tailrec
 import scala.io

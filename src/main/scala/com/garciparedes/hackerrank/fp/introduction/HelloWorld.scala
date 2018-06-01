@@ -1,4 +1,4 @@
-package com.garciparedes.hackerrank.fp
+package com.garciparedes.hackerrank.fp.introduction
 
 object HelloWorld extends App {
 
