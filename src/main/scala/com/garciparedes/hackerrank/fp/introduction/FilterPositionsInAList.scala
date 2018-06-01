@@ -8,7 +8,7 @@ object FilterPositionsInAList extends App {
   @tailrec
   def f(arr: List[Int], arr2: List[Int] = List()): List[Int] = {
     arr.length match {
-      case x == 1 => arr2
+      case x if x == 1 => arr2
       case _ => f(arr.drop(2), arr2 :+ arr(1))
     }
   }
