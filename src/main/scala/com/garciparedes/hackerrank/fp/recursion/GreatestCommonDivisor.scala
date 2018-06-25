@@ -3,7 +3,7 @@ package com.garciparedes.hackerrank.fp.recursion
 import scala.annotation.tailrec
 import scala.io
 
-object gcd extends App {
+object GreatestCommonDivisor extends App {
 
   @tailrec
   def gcd(x: Int, y: Int): Int = {
